@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <input id="data" type="text"> <button>click</button>
+<h1 id="city" class="city"></h1> 
+<h1 id="temp" class="temp"></h1>
+
+
+
+    <script>
+
+let data= document.getElementById('data')
+data.addEventListener('keypress', (event)=> {
+    if(event.keyCode === 13){
+
+        getweather(data.value)
+
+    } 
+
+})
+
+const getweather=(city)=>{
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=3ac957ecc73215a744bf162a381bcd2c`).then((res)=> res.json()).then(data => {
+        console.log(data)
+        document.getElementById('city').innerHTML= data.name;
+        document.getElementById('temp').innerHTML= `${Math.round(data.main.temp)}&deg;C`;
+    })
+
+
+}
+
+
+
+    </script>
+    
+</body>
+</html>
